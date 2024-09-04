@@ -1,4 +1,4 @@
-
+#polla
 from tkinter import *
 from PIL import ImageTk, Image
 import random
