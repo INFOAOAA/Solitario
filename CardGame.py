@@ -1,4 +1,6 @@
-#polla
+#git push -u origin main
+#git add --all
+#git commit -m "nombre del cambio"
 from tkinter import *
 from PIL import ImageTk, Image
 import random
@@ -220,7 +222,7 @@ createRow(row7,6,21)
 blankBox = Label()
 
 def coordsInfo():
-    text="x="+str(Coords[0])+"    y="+str(Coords[1])
+    text="x="+str(Coords[0])+"    y="+str(Coords[1])+"   Condition"+str(val)
     blankBox = Label(root, text=text)
     blankBox.place(x=0,y=0)
     root.after(60,coordsInfo)
@@ -235,15 +237,8 @@ def coordsValue():
     BobMarley.place(x=0,y=50)
     root.after(60,coordsValue)
 
-def preValidateRow(rowValues,row,Rodolfo,Antonio,ind):
-    if ((rowValues[-1] == Rodolfo[-1]-14 or rowValues[-1] == Rodolfo[-1]+12) and (Coords[0]+50>=positionx[ind] and Coords[0]-50<=positionx[ind]) and (Coords[1]+72>=positiony[len(Rodolfo)-1] and Coords[1]-72<=positiony[len(Rodolfo)-1])):
-        Rodolfo.append(rowValues[-1])
-        print(Coords[0])
-        del Rodolfo[-1]
-        Antonio.append(row[-1])
-        del row[-1]
-        Antonio[-1].place(x=positionx[ind],y=positiony[len(ind)])
-        val = True
+val = False
+
 def validateRow(rowValues,row):
 
     if(rowValues[-1]>38):
@@ -252,15 +247,70 @@ def validateRow(rowValues,row):
     elif(rowValues[-1]<13):
         rowValues[-1]+=26
         
-    preValidateRow(rowValues,row,rowValues1,row1,0)
-    preValidateRow(rowValues,row,rowValues2,row2,1)
-    preValidateRow(rowValues,row,rowValues3,row3,2)
-    preValidateRow(rowValues,row,rowValues4,row4,3)
-    preValidateRow(rowValues,row,rowValues5,row5,4)
-    preValidateRow(rowValues,row,rowValues6,row6,5)
-    preValidateRow(rowValues,row,rowValues7,row7,6)
+    if (rowValues != rowValues1 and (rowValues[-1] == rowValues1[-1]-14 or rowValues[-1] == rowValues1[-1]+12) and (Coords[0]+50>=positionx[0] and Coords[0]-50<=positionx[0]) and (Coords[1]+72>=positiony[len(row1)-1] and Coords[1]-72<=positiony[len(row1)-1])):
+        rowValues1.append(rowValues[-1])
+        print(Coords[0])
+        del rowValues[-1]
+        row1.append(row[-1])
+        del row[-1]
+        row1[-1].place(x=positionx[0],y=positiony[len(row1)])
+        val = True
         
-    if val==False:
+    elif (rowValues != rowValues2 and (rowValues[-1] == rowValues2[-1]-14 or rowValues[-1] == rowValues2[-1]+12) and (Coords[0]+50>=positionx[1] and Coords[0]-50<=positionx[1]) and (Coords[1]+72>=positiony[len(row2)-1] and Coords[1]-72<=positiony[len(row2)-1])):
+        rowValues2.append(rowValues[-1])
+        print(Coords[0])
+        del rowValues[-1]
+        row2.append(row[-1])
+        del row[-1]
+        row2[-1].place(x=positionx[1],y=positiony[len(row2)])
+        val = True
+        
+    elif (rowValues != rowValues3 and (rowValues[-1] == rowValues3[-1]-14 or rowValues[-1] == rowValues3[-1]+12) and (Coords[0]+50>=positionx[2] and Coords[0]-50<=positionx[2]) and (Coords[1]+72>=positiony[len(row3)-1] and Coords[1]-72<=positiony[len(row3)-1])):
+        rowValues1.append(rowValues[-1])
+        print(Coords[0])
+        del rowValues[-1]
+        row3.append(row[-1])
+        del row[-1]
+        row3[-1].place(x=positionx[2],y=positiony[len(row3)])
+        val = True
+        
+    elif (rowValues != rowValues4 and (rowValues[-1] == rowValues4[-1]-14 or rowValues[-1] == rowValues4[-1]+12) and (Coords[0]+50>=positionx[3] and Coords[0]-50<=positionx[3]) and (Coords[1]+72>=positiony[len(row4)-1] and Coords[1]-72<=positiony[len(row4)-1])):
+        rowValues1.append(rowValues[-1])
+        print(Coords[0])
+        del rowValues[-1]
+        row4.append(row[-1])
+        del row[-1]
+        row4[-1].place(x=positionx[3],y=positiony[len(row4)])
+        val = True
+        
+    elif (rowValues != rowValues5 and (rowValues[-1] == rowValues5[-1]-14 or rowValues[-1] == rowValues5[-1]+12) and (Coords[0]+50>=positionx[4] and Coords[0]-50<=positionx[4]) and (Coords[1]+72>=positiony[len(row5)-1] and Coords[1]-72<=positiony[len(row5)-1])):
+        rowValues1.append(rowValues[-1])
+        print(Coords[0])
+        del rowValues[-1]
+        row5.append(row[-1])
+        del row[-1]
+        row5[-1].place(x=positionx[4],y=positiony[len(row5)])
+        val = True
+        
+    elif (rowValues != rowValues6 and (rowValues[-1] == rowValues6[-1]-14 or rowValues[-1] == rowValues6[-1]+12) and (Coords[0]+50>=positionx[5] and Coords[0]-50<=positionx[5]) and (Coords[1]+72>=positiony[len(row6)-1] and Coords[1]-72<=positiony[len(row6)-1])):
+        rowValues6.append(rowValues[-1])
+        print(Coords[0])
+        del rowValues[-1]
+        row6.append(row[-1])
+        del row[-1]
+        row6[-1].place(x=positionx[5],y=positiony[len(row6)])
+        val = True
+        
+    elif (rowValues != rowValues7 and (rowValues[-1] == rowValues7[-1]-14 or rowValues[-1] == rowValues7[-1]+12) and (Coords[0]+50>=positionx[6] and Coords[0]-50<=positionx[6]) and (Coords[1]+72>=positiony[len(row7)-1] and Coords[1]-72<=positiony[len(row7)-1])):
+        rowValues7.append(rowValues[-1])
+        print(Coords[0])
+        del rowValues[-1]
+        row7.append(row[-1])
+        del row[-1]
+        row7[-1].place(x=positionx[6],y=positiony[len(row7)])
+        val = True
+        
+    else:
         row[-1].place(x=row[-1].winfo_x(),y=row[-1].winfo_y())
         val = False
     root.after(30,validateRow)
@@ -278,8 +328,6 @@ row_clubs=[]
 row_diamonds=[]
 row_hearts=[]
 row_spades=[]
-
-
 
 for index in range (0,25,1):
     label = tk.Label(root, image=randomlyChosenCards[index+27])
