@@ -1,16 +1,9 @@
-print("¿Cuál sería el número menor del rango que quisiera aplicar?")
-a = input()
-a = int(a)
-print("¿Cuál sería el número mayor del rango que quisiera aplicar?")
-b = input()
-b = int(b)
-print("Su cuenta regresiva sería:")
-print(b)
-continuee = True
+def uno (a, b) :
+        a = a // 3
+        return a + b
 
-while continuee:
-    if(a!=b):
-        b-=1
-        print(b)
-    else:
-        continuee = False
+x = 10
+y = 40
+
+z = uno(y, x)
+print(z)

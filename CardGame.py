@@ -51,12 +51,19 @@ def on_drag(event):
         Coords[0]=x
         Coords[1]=y
 
+def on_click(event):
+    global move
+    move = event.widget
+    move.start_x = positionx[0]
+    move.start_y = positiony[-1]
+    move.place(x=290,y=positiony[-1])
+    
 def stop_drag(event):
     global dragging_label
     dragging_label = None
-    Coords[0]=None
-    Coords[1]=None
-
+    time.sleep(1)
+    Coords[0]=0
+    Coords[1]=0
 
 def follow_mouse(event):
     x = event.x_root - root.winfo_rootx()
@@ -64,7 +71,6 @@ def follow_mouse(event):
     blankBox.place(x=x, y=y)
 
 #back
-
 
 cardBack = Image.open("Back.png")
 cardBackFinal = cardBack.resize((100,141))
@@ -105,9 +111,6 @@ for index in range(0,52,1):
         allCards.append(cards_spades[index-26])
     elif(index<52 and index>=39):
         allCards.append(cards_diamonds[index-39])
-
-xcor = []
-ycor = []
 
 row1 = [None]
 row2 = [None]*2
@@ -221,14 +224,6 @@ createRow(row7,6,21)
 
 blankBox = Label()
 
-def coordsInfo():
-    text="x="+str(Coords[0])+"    y="+str(Coords[1])+"   Condition"+str(val)
-    blankBox = Label(root, text=text)
-    blankBox.place(x=0,y=0)
-    root.after(60,coordsInfo)
-
-val = False
-
 BobMarley = Label()
 
 def coordsValue():
@@ -237,101 +232,40 @@ def coordsValue():
     BobMarley.place(x=0,y=50)
     root.after(60,coordsValue)
 
-val = False
+val = 0
 
-def validateRow(rowValues,row):
+def validateNumberRow():
 
-    if(rowValues[-1]>38):
-        rowValues[-1]-=26
-        
-    elif(rowValues[-1]<13):
-        rowValues[-1]+=26
-        
-    if (rowValues != rowValues1 and (rowValues[-1] == rowValues1[-1]-14 or rowValues[-1] == rowValues1[-1]+12) and (Coords[0]+50>=positionx[0] and Coords[0]-50<=positionx[0]) and (Coords[1]+72>=positiony[len(row1)-1] and Coords[1]-72<=positiony[len(row1)-1])):
-        rowValues1.append(rowValues[-1])
-        print(Coords[0])
-        del rowValues[-1]
-        row1.append(row[-1])
-        del row[-1]
+    if(positionx[0]-50<=Coords[0]<=positionx[0]+50):
+        deletedCard = row1[-1]
+        deletedCard.place(x=0,y=700)
+        row1.append(row2[-1])
+        del row2[-1]
         row1[-1].place(x=positionx[0],y=positiony[len(row1)])
-        val = True
-        
-    elif (rowValues != rowValues2 and (rowValues[-1] == rowValues2[-1]-14 or rowValues[-1] == rowValues2[-1]+12) and (Coords[0]+50>=positionx[1] and Coords[0]-50<=positionx[1]) and (Coords[1]+72>=positiony[len(row2)-1] and Coords[1]-72<=positiony[len(row2)-1])):
-        rowValues2.append(rowValues[-1])
-        print(Coords[0])
-        del rowValues[-1]
-        row2.append(row[-1])
-        del row[-1]
-        row2[-1].place(x=positionx[1],y=positiony[len(row2)])
-        val = True
-        
-    elif (rowValues != rowValues3 and (rowValues[-1] == rowValues3[-1]-14 or rowValues[-1] == rowValues3[-1]+12) and (Coords[0]+50>=positionx[2] and Coords[0]-50<=positionx[2]) and (Coords[1]+72>=positiony[len(row3)-1] and Coords[1]-72<=positiony[len(row3)-1])):
-        rowValues1.append(rowValues[-1])
-        print(Coords[0])
-        del rowValues[-1]
-        row3.append(row[-1])
-        del row[-1]
-        row3[-1].place(x=positionx[2],y=positiony[len(row3)])
-        val = True
-        
-    elif (rowValues != rowValues4 and (rowValues[-1] == rowValues4[-1]-14 or rowValues[-1] == rowValues4[-1]+12) and (Coords[0]+50>=positionx[3] and Coords[0]-50<=positionx[3]) and (Coords[1]+72>=positiony[len(row4)-1] and Coords[1]-72<=positiony[len(row4)-1])):
-        rowValues1.append(rowValues[-1])
-        print(Coords[0])
-        del rowValues[-1]
-        row4.append(row[-1])
-        del row[-1]
-        row4[-1].place(x=positionx[3],y=positiony[len(row4)])
-        val = True
-        
-    elif (rowValues != rowValues5 and (rowValues[-1] == rowValues5[-1]-14 or rowValues[-1] == rowValues5[-1]+12) and (Coords[0]+50>=positionx[4] and Coords[0]-50<=positionx[4]) and (Coords[1]+72>=positiony[len(row5)-1] and Coords[1]-72<=positiony[len(row5)-1])):
-        rowValues1.append(rowValues[-1])
-        print(Coords[0])
-        del rowValues[-1]
-        row5.append(row[-1])
-        del row[-1]
-        row5[-1].place(x=positionx[4],y=positiony[len(row5)])
-        val = True
-        
-    elif (rowValues != rowValues6 and (rowValues[-1] == rowValues6[-1]-14 or rowValues[-1] == rowValues6[-1]+12) and (Coords[0]+50>=positionx[5] and Coords[0]-50<=positionx[5]) and (Coords[1]+72>=positiony[len(row6)-1] and Coords[1]-72<=positiony[len(row6)-1])):
-        rowValues6.append(rowValues[-1])
-        print(Coords[0])
-        del rowValues[-1]
-        row6.append(row[-1])
-        del row[-1]
-        row6[-1].place(x=positionx[5],y=positiony[len(row6)])
-        val = True
-        
-    elif (rowValues != rowValues7 and (rowValues[-1] == rowValues7[-1]-14 or rowValues[-1] == rowValues7[-1]+12) and (Coords[0]+50>=positionx[6] and Coords[0]-50<=positionx[6]) and (Coords[1]+72>=positiony[len(row7)-1] and Coords[1]-72<=positiony[len(row7)-1])):
-        rowValues7.append(rowValues[-1])
-        print(Coords[0])
-        del rowValues[-1]
-        row7.append(row[-1])
-        del row[-1]
-        row7[-1].place(x=positionx[6],y=positiony[len(row7)])
-        val = True
-        
-    else:
-        row[-1].place(x=row[-1].winfo_x(),y=row[-1].winfo_y())
-        val = False
-    root.after(30,validateRow)
-    
+        time.sleep(5)
+    root.after(60,validateNumberRow)
+
+def coordsInfo():
+    text="x="+str(Coords[0])+"    y="+str(Coords[1])+"   Condition"+str(val)
+    blankBox = Label(root, text=text)
+    blankBox.place(x=0,y=0)
+    root.after(60,coordsInfo)
+
+validateNumberRow()
 coordsValue()
-validateRow(rowValues1,row1)
-validateRow(rowValues2,row2)
-validateRow(rowValues3,row3)
-validateRow(rowValues4,row4)
-validateRow(rowValues5,row5)
-validateRow(rowValues6,row6)
-validateRow(rowValues7,row7)
+coordsInfo()
 
 row_clubs=[]
 row_diamonds=[]
 row_hearts=[]
 row_spades=[]
-
+bundle = []
 for index in range (0,25,1):
     label = tk.Label(root, image=randomlyChosenCards[index+27])
-    label.place(x=positionx[0],y=positiony[-1])
+    bundle.append(label)
+    bundle[index].place(x=positionx[0],y=positiony[-1])
+    bundle[index].bind("<ButtonPress-1>",on_click)
+    
 
 coordsInfo()
 
